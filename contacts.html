@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакти — Uhryniv Craft</title>
+    <meta name="description" content="Зв'яжіться зі спільнотою Uhryniv Craft у Discord, Telegram, YouTube чи TikTok.">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="loader" id="loader">
+        <div class="loader-cube"></div>
+    </div>
+
+    <header class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft" class="logo-img">
+                <span class="logo-text">Uhryniv Craft</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Головна</a>
+                <a href="about.html">Про сервер</a>
+                <a href="rules.html">Правила</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contacts.html">Контакти</a>
+            </nav>
+
+            <button class="burger" id="burgerBtn" aria-label="Відкрити меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <p class="section-eyebrow reveal">Ми на зв'язку</p>
+            <h1 class="reveal">Контакти</h1>
+            <p class="reveal">Приєднуйтесь до нашої спільноти в соціальних мережах.</p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <!--
+                Заміни "#" на свої реальні посилання на Discord,
+                Telegram, YouTube та TikTok.
+            -->
+            <div class="contacts-grid">
+
+                <a href="https://discord.gg/vBCszVpQJcard discord reveal">
+                    <div class="contact-icon"><i class="fa-brands fa-discord"></i></div>
+                    <h3>Discord</h3>
+                    <p>Спілкування, новини та підтримка</p>
+                    <span class="btn btn-secondary btn-small">Приєднатися</span>
+                </a>
+
+                <a href="https://t.me/UhrynivCraft" class="glass-card contact-card telegram reveal">
+                    <div class="contact-icon"><i class="fa-brands fa-telegram"></i></div>
+                    <h3>Telegram</h3>
+                    <p>Оголошення та швидкі оновлення</p>
+                    <span class="btn btn-secondary btn-small">Підписатися</span>
+                </a>
+
+                <a href="https://youtu.be/PYu58TDDkBc?is=5h_CYziQ2aiTeoaf" class="glass-card contact-card youtube reveal">
+                    <div class="contact-icon"><i class="fa-brands fa-youtube"></i></div>
+                    <h3>YouTube</h3>
+                    <p>Відео про сервер та подій</p>
+                    <span class="btn btn-secondary btn-small">Дивитися</span>
+                </a>
+
+                <a href="www.tiktok.com/@lipoveet" class="glass-card contact-card tiktok reveal">
+                    <div class="contact-icon"><i class="fa-brands fa-tiktok"></i></div>
+                    <h3>TikTok</h3>
+                    <p>Короткі відео та цікаві моменти</p>
+                    <span class="btn btn-secondary btn-small">Переглянути</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft">
+                <span>Uhryniv Craft</span>
+            </div>
+
+            <div class="footer-social">
+                 <a href="https://discord.gg/vBCszVpQJ" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://t.me/UhrynivCraft" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://youtu.be/PYu58TDDkBc?is=5h_CYziQ2aiTeoaf" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="www.tiktok.com/@lipoveet" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+
+            <p class="copyright">© 2026 Uhryniv Craft</p>
+            <p class="made-with">Створено як пам'ять про наші пригоди.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Нагору">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

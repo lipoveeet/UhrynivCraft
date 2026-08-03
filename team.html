@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Команда — Uhryniv Craft</title>
+    <meta name="description" content="Знайомтеся з командою адміністрації серверу Uhryniv Craft.">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="loader" id="loader">
+        <div class="loader-cube"></div>
+    </div>
+
+    <header class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft" class="logo-img">
+                <span class="logo-text">Uhryniv Craft</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Головна</a>
+                <a href="about.html">Про сервер</a>
+                <a href="rules.html">Правила</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contacts.html">Контакти</a>
+            </nav>
+
+            <button class="burger" id="burgerBtn" aria-label="Відкрити меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <p class="section-eyebrow reveal">Наша команда</p>
+            <h1 class="reveal">Люди, які тримають сервер живим</h1>
+            <p class="reveal">Команда адміністрації, яка стежить за порядком та розвитком.</p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <!--
+                Щоб додати нового учасника команди — скопіюй
+                один блок ".team-card" і зміни ім'я, роль та іконку.
+            -->
+            <div class="team-grid">
+
+                <div class="glass-card team-card reveal">
+                    <div class="team-avatar"><i class="fa-solid fa-crown"></i></div>
+                    <h3>Богдан</h3>
+                    <p class="team-role">👑 Босс </p>
+                    <p>Зробив Безпалєзний Сайт.</p>
+                </div>
+
+                <div class="glass-card team-card reveal">
+                    <div class="team-avatar"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Коля Возняк </h3>
+                    <p class="team-role">🛡 Адміністратор</p>
+                    <p>Купив хост добавив плагіни.</p>
+                </div>
+
+                <div class="glass-card team-card reveal">
+                    <div class="team-avatar"><i class="fa-solid fa-khanda"></i></div>
+                    <h3>Станіслав Пупец</h3>
+                    <p class="team-role">⚔ Модератор</p>
+                    <p>Пиздів під руку.</p>
+                </div>
+                
+                <div class="glass-card team-card reveal">
+                    <div class="team-avatar"><i class="fa-solid fa-crown"></i></div>
+                    <h3>Максим Пузів</h3>
+                    <p class="team-role"> Група підтримки </p>
+                    <p>А Макс просто хароший парєнь.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft">
+                <span>Uhryniv Craft</span>
+            </div>
+
+            <div class="footer-social">
+                <a href="https://discord.gg/vBCszVpQJ" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://t.me/UhrynivCraft" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://youtu.be/PYu58TDDkBc?is=5h_CYziQ2aiTeoaf" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="www.tiktok.com/@lipoveet" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+
+            <p class="copyright">© 2026 Uhryniv Craft</p>
+            <p class="made-with">Сервер де жуют спущонку</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Нагору">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

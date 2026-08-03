@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uhryniv Craft — Світ, у який завжди хочеться повернутися</title>
+    <meta name="description" content="Uhryniv Craft — приватний Minecraft-сервер для друзів. Без донату, лише поповнення балансу. Приєднуйся!">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts: Sora (заголовки) + Inter (текст) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (іконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Стилі сайту -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ЕКРАН ЗАВАНТАЖЕННЯ -->
+    <div class="loader" id="loader">
+        <div class="loader-cube"></div>
+    </div>
+
+    <!-- ШАПКА САЙТУ -->
+    <header class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft" class="logo-img">
+                <span class="logo-text">Uhryniv Craft</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Головна</a>
+                <a href="about.html">Про сервер</a>
+                <a href="rules.html">Правила</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contacts.html">Контакти</a>
+            </nav>
+
+            <button class="burger" id="burgerBtn" aria-label="Відкрити меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="container hero-content">
+            <p class="hero-eyebrow reveal">
+                <i class="fa-solid fa-circle" style="font-size:8px;"></i>
+                <span id="heroStatusText">Сервер онлайн</span>
+            </p>
+            <h1 class="hero-title reveal">Uhryniv <span>Craft</span></h1>
+            <p class="hero-subtitle reveal">Світ, у який завжди хочеться повернутися.</p>
+            <div class="hero-buttons reveal">
+                <button class="btn btn-primary" id="joinBtn">
+                    <i class="fa-solid fa-play"></i> Приєднатися
+                </button>
+                <a href="payment.html" class="btn btn-secondary">
+                    <i class="fa-solid fa-wallet"></i> Поповнити баланс
+                </a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- СТАТУС СЕРВЕРА -->
+    <section class="section" id="server">
+        <div class="container">
+            <p class="section-eyebrow reveal">Онлайн зараз</p>
+            <h2 class="section-title reveal">Статус сервера</h2>
+            <p class="section-subtitle reveal">
+                Дані нижче поки що беруться з файлу script.js. У майбутньому
+                сюди легко підключити реальне API Minecraft-сервера.
+            </p>
+
+            <div class="server-card glass-card reveal">
+                <div class="server-status">
+                    <div>
+                        <span class="status-dot" id="statusDot"></span>
+                        <span class="status-label" id="statusLabel">Сервер онлайн</span>
+                    </div>
+                </div>
+
+                <div class="server-info-grid">
+                    <div class="server-info-item">
+                        <span class="label">IP сервера</span>
+                        <div class="server-ip-box">
+                            <span class="value" id="serverIp">play.uhrynivcraft.net</span>
+                            <button class="copy-btn" title="Скопіювати IP">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="server-info-item">
+                        <span class="label">Версія</span>
+                        <span class="value" id="serverVersion">1.21.8</span>
+                    </div>
+
+                    <div class="server-info-item">
+                        <span class="label">Гравці онлайн</span>
+                        <span class="value" id="serverPlayers">15 / 50</span>
+                    </div>
+                </div>
+
+                <a href="payment.html" class="btn btn-primary">
+                    <i class="fa-solid fa-play"></i> Грати
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРО СЕРВЕР (коротко) -->
+    <section class="section" id="about-preview">
+        <div class="container about-grid">
+            <div class="glass-card about-card reveal">
+                <p class="section-eyebrow">Хто ми</p>
+                <h2 class="section-title">Сервер, створений для друзів</h2>
+                <p>
+                    Uhryniv Craft — це не комерційний проєкт, а тепле місце для
+                    друзів і знайомих, які хочуть разом будувати, виживати та
+                    створювати спогади.
+                </p>
+                <p>
+                    У нас немає донату, що дає перевагу в грі. Є лише
+                    можливість підтримати сервер добровільним поповненням
+                    балансу — це допомагає оплачувати хостинг.
+                </p>
+                <a href="about.html" class="btn btn-secondary" style="margin-top: 20px;">
+                    Дізнатися більше <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="features-grid" style="grid-template-columns: 1fr;">
+                <div class="glass-card feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-heart"></i></div>
+                    <h3>Без донату</h3>
+                    <p>Ніякої переваги за гроші — тільки чесна гра для всіх.</p>
+                </div>
+                <div class="glass-card feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>Дружня спільнота</h3>
+                    <p>Місце, де всі знають одне одного і поважають правила.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОСОБЛИВОСТІ -->
+    <section class="section" id="features">
+        <div class="container">
+            <p class="section-eyebrow reveal">Чому саме ми</p>
+            <h2 class="section-title reveal">Що робить сервер особливим</h2>
+            <p class="section-subtitle reveal">Три причини залишитися з нами надовго.</p>
+
+            <div class="features-grid">
+                <div class="glass-card feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Захист від грифу</h3>
+                    <p>Ваші будівлі та ресурси надійно захищені від сторонніх.</p>
+                </div>
+                <div class="glass-card feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-server"></i></div>
+                    <h3>Стабільна робота</h3>
+                    <p>Сервер працює стабільно, без лагів і несподіваних вимкнень.</p>
+                </div>
+                <div class="glass-card feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-photo-film"></i></div>
+                    <h3>Живі спогади</h3>
+                    <p>Кожна побудова — частина спільної історії нашої громади.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft">
+                <span>Uhryniv Craft</span>
+            </div>
+
+            <div class="footer-social">
+               <a href="https://discord.gg/vBCszVpQJ" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://t.me/UhrynivCraft" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://youtu.be/PYu58TDDkBc?is=5h_CYziQ2aiTeoaf" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="www.tiktok.com/@lipoveet" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+
+            <p class="copyright">© 2026 Uhryniv Craft</p>
+            <p class="made-with">Створено як пам'ять про наші пригоди.</p>
+        </div>
+    </footer>
+
+    <!-- КНОПКА НАГОРУ -->
+    <button class="back-to-top" id="backToTop" aria-label="Нагору">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

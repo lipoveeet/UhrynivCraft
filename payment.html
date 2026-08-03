@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поповнити баланс — Uhryniv Craft</title>
+    <meta name="description" content="Поповнення балансу на сервері Uhryniv Craft — без донату, лише добровільна підтримка.">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="loader" id="loader">
+        <div class="loader-cube"></div>
+    </div>
+
+    <header class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft" class="logo-img">
+                <span class="logo-text">Uhryniv Craft</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Головна</a>
+                <a href="about.html">Про сервер</a>
+                <a href="rules.html">Правила</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contacts.html">Контакти</a>
+            </nav>
+
+            <button class="burger" id="burgerBtn" aria-label="Відкрити меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <p class="section-eyebrow reveal">Підтримка серверу</p>
+            <h1 class="reveal">Поповнити баланс</h1>
+            <p class="reveal">
+                На сервері немає донату, що дає перевагу. Є лише можливість
+                добровільно підтримати проєкт — це допомагає оплачувати хостинг.
+            </p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container payment-layout">
+
+            <!-- Реквізити та форма -->
+            <div class="glass-card payment-card reveal">
+                <p class="section-eyebrow">Реквізити</p>
+                <h2 class="section-title" style="font-size: 1.5rem;">Дані для переказу</h2>
+
+                <div class="payment-field">
+                    <span class="label">Номер картки</span>
+                    <div class="payment-value-box">
+                        <span id="cardNumber">0000 1111 2222 3333</span>
+                        <button class="copy-btn" data-copy="card" title="Скопіювати номер картки">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="payment-field">
+                    <span class="label">Ім'я отримувача</span>
+                    <div class="payment-value-box">
+                        <span id="receiverName">Ярослав Угринів</span>
+                    </div>
+                </div>
+
+                <div class="payment-field">
+                    <span class="label">QR-код для оплати</span>
+                    <div class="qr-placeholder">
+                        Місце під QR-код<br>(додай своє зображення QR у assets/)
+                    </div>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid var(--color-panel-border); margin: 30px 0;">
+
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="payerNick">Ваш нік у грі</label>
+                        <input type="text" id="payerNick" placeholder="Наприклад: Steve_UA" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payerAmount">Сума поповнення (грн)</label>
+                        <input type="number" id="payerAmount" placeholder="Наприклад: 100" min="1" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fa-solid fa-check"></i> Я оплатив
+                    </button>
+                </form>
+
+                <div class="payment-success" id="paymentSuccess">
+                    <i class="fa-solid fa-circle-check" style="font-size: 1.4rem;"></i>
+                    <span>Дякуємо! Після перевірки адміністрація вручну зарахує кошти на ваш баланс.</span>
+                </div>
+            </div>
+
+            <!-- Інструкція -->
+            <div class="glass-card payment-card reveal">
+                <p class="section-eyebrow">Покроково</p>
+                <h2 class="section-title" style="font-size: 1.5rem;">Як оплатити</h2>
+
+                <div class="steps-list">
+                    <div class="step-item">
+                        <span class="step-number">1</span>
+                        <p>Відкрийте застосунок вашого банку.</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">2</span>
+                        <p>Перекажіть потрібну суму на вказану картку.</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">3</span>
+                        <p>Вкажіть свій ігровий нік у формі переказу або коментарі.</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">4</span>
+                        <p>Натисніть кнопку "Я оплатив" на цій сторінці.</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">5</span>
+                        <p>Адміністрація перевірить оплату та зарахує кошти вручну.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft">
+                <span>Uhryniv Craft</span>
+            </div>
+
+            <div class="footer-social">
+               <a href="https://discord.gg/vBCszVpQJ" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://t.me/UhrynivCraft" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://youtu.be/PYu58TDDkBc?is=5h_CYziQ2aiTeoaf" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="www.tiktok.com/@lipoveet" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+
+            <p class="copyright">© 2026 Uhryniv Craft</p>
+            <p class="made-with">Створено як пам'ять про наші пригоди.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Нагору">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

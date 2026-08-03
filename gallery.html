@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея — Uhryniv Craft</title>
+    <meta name="description" content="Скріншоти світу серверу Uhryniv Craft — будівлі, пригоди та спогади.">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="loader" id="loader">
+        <div class="loader-cube"></div>
+    </div>
+
+    <header class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft" class="logo-img">
+                <span class="logo-text">Uhryniv Craft</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Головна</a>
+                <a href="about.html">Про сервер</a>
+                <a href="rules.html">Правила</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contacts.html">Контакти</a>
+            </nav>
+
+            <button class="burger" id="burgerBtn" aria-label="Відкрити меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <p class="section-eyebrow reveal">Наш світ</p>
+            <h1 class="reveal">Галерея</h1>
+            <p class="reveal">Найкращі моменти, будівлі та пригоди нашої спільноти.</p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <!--
+                Фото додаються автоматично зі script.js (масив galleryPhotos).
+                Щоб додати нове фото: поклади файл у assets/gallery/
+                та впиши його назву в масив galleryPhotos у script.js.
+            -->
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX (велике фото на весь екран) -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Закрити">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img src="" alt="Збільшене фото" id="lightboxImg">
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft">
+                <span>Uhryniv Craft</span>
+            </div>
+
+            <div class="footer-social">
+                <a href="https://discord.gg/vBCszVpQJ" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://t.me/UhrynivCraft" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://youtu.be/PYu58TDDkBc?is=5h_CYziQ2aiTeoaf" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="www.tiktok.com/@lipoveet" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+
+            <p class="copyright">© 2026 Uhryniv Craft</p>
+            <p class="made-with">Створено як пам'ять про наші пригоди.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Нагору">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
