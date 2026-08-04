@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Як приєднатися — Uhryniv Craft</title>
+    <meta name="description" content="Завантаж моди та дізнайся, як приєднатися до серверу Uhryniv Craft.">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="loader" id="loader">
+        <div class="loader-cube"></div>
+    </div>
+
+    <header class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft" class="logo-img">
+                <span class="logo-text">Uhryniv Craft</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Головна</a>
+                <a href="about.html">Про сервер</a>
+                <a href="rules.html">Правила</a>
+                <a href="team.html">Команда</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contacts.html">Контакти</a>
+            </nav>
+
+            <button class="burger" id="burgerBtn" aria-label="Відкрити меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <p class="section-eyebrow reveal">Перший крок</p>
+            <h1 class="reveal">Як приєднатися</h1>
+            <p class="reveal">
+                Перед тим як зайти на сервер, завантаж і встанови набір
+                модів. Це займе лише кілька хвилин.
+            </p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container" style="max-width: 780px;">
+
+            <!-- Завантаження модів -->
+            <div class="glass-card payment-card reveal">
+                <p class="section-eyebrow">Крок 1</p>
+                <h2 class="section-title" style="font-size: 1.5rem;">Завантаж моди</h2>
+                <p style="color: var(--color-gray); margin-bottom: 26px;">
+                    Усі необхідні моди для гри на сервері зібрані в одному
+                    архіві на Google Drive. Завантаж його, розпакуй у папку
+                    <code>mods</code> свого лаунчера і запусти гру.
+                </p>
+
+                <!--
+                    ЗАМІНИ ПОСИЛАННЯ НИЖЧЕ на своє реальне посилання
+                    на Google Drive з модами.
+                -->
+                <a href="https://drive.google.com/drive/folders/14neNgF9OwJ394bge4Dky3pXjVDgp_k8b?usp=sharing"
+                   target="_blank"
+                   rel="noopener"
+                   class="btn btn-primary btn-block">
+                    <i class="fa-brands fa-google-drive"></i> Завантажити моди
+                </a>
+
+                <hr style="border: none; border-top: 1px solid var(--color-panel-border); margin: 34px 0;">
+
+                <p class="section-eyebrow">Крок 2</p>
+                <h2 class="section-title" style="font-size: 1.5rem;">Підключись до серверу</h2>
+
+                <div class="steps-list" style="margin-bottom: 30px;">
+                    <div class="step-item">
+                        <span class="step-number">1</span>
+                        <p>Розпакуй завантажений архів у папку модів твого лаунчера.</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">2</span>
+                        <p>Запусти Minecraft з встановленими модами.</p>
+                    </div>
+                    <div class="step-item">
+                        <span class="step-number">3</span>
+                        <p>Додай сервер за IP: <strong id="joinServerIp">185.206.150.54:25611</strong></p>
+                    </div>
+                </div>
+
+                <!-- Кнопка "Далі" -> веде на сторінку оплати -->
+                <a href="payment.html" class="btn btn-secondary btn-block">
+                    Далі <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Uhryniv Craft">
+                <span>Uhryniv Craft</span>
+            </div>
+
+            <div class="footer-social">
+                <a href="https://discord.gg/vBCszVpQJ" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://t.me/UhrynivCraft" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://youtu.be/PYu58TDDkBc?is=5h_CYziQ2aiTeoaf" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="www.tiktok.com/@lipoveet" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+
+            <p class="copyright">© 2026 Uhryniv Craft</p>
+            <p class="made-with">Створено як пам'ять про наші пригоди.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Нагору">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Підставляємо реальний IP сервера з config (script.js), якщо він завантажений
+        if (typeof config !== "undefined") {
+            document.getElementById("joinServerIp").textContent = config.serverIP;
+        }
+    </script>
+</body>
+</html>

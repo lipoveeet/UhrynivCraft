@@ -13,15 +13,21 @@ const config = {
     serverName: "Uhryniv Craft",
 
     // Дані сервера (в майбутньому сюди можна підключити реальне API)
-    serverIP: "play.uhrynivcraft.net",
+    serverIP: "185.206.150.54:25611",
     version: "1.21.8",
     online: true,      // true = сервер онлайн, false = офлайн
     players: 15,        // поточна кількість гравців
     maxPlayers: 50,      // максимальний онлайн
 
     // Дані для сторінки оплати
-    cardNumber: "0000 1111 2222 3333",
-    receiver: "Ярослав Угринів"
+    cardNumber: "5355 2800 2653 5094",
+    receiver: "Богдан Липовецький",
+
+    // Telegram-бот, куди прилітатимуть заявки на оплату (нік + сума).
+    telegram: {
+        botToken: "8827058700:AAGk5zGaY72zfxFZvSpkJxim36Oepq92LS8",
+        chatId: "1227666441"
+    }
 };
 
 /* Той самий об'єкт, але зі старою назвою "server" —
@@ -70,10 +76,21 @@ function hideLoader() {
 
 /* =========================================================
    4. ЗАПОВНЕННЯ ДАНИХ СЕРВЕРА НА СТОРІНЦІ
-   Шукаємо елементи за id та вставляємо значення з config.
-   Якщо елемента немає на сторінці — просто пропускаємо (безпечно).
+   Спочатку показуємо дані з config (щоб не було порожньо),
+   а тоді підтягуємо ЖИВИЙ статус через публічне API —
+   без жодного плагіна на сервері.
    ========================================================= */
 function fillServerInfo() {
+    updateServerUI(); // показуємо збережені дані одразу
+
+    fetchLiveServerStatus(); // і одразу підтягуємо реальні
+
+    // Оновлюємо статус кожні 60 секунд, поки сторінка відкрита
+    setInterval(fetchLiveServerStatus, 60000);
+}
+
+/* Малює поточні дані з config на сторінці */
+function updateServerUI() {
     setText("serverIp", config.serverIP);
     setText("serverVersion", config.version);
     setText("serverPlayers", config.players + " / " + config.maxPlayers);
@@ -100,6 +117,36 @@ function fillServerInfo() {
     }
 }
 
+/* Запитує реальний статус сервера через безкоштовне публічне API
+   (mcsrvstat.us) — воно "пінгує" сервер так само, як це робить
+   сам Minecraft у списку серверів. Плагін для цього не потрібен. */
+function fetchLiveServerStatus() {
+    fetch("https://api.mcsrvstat.us/3/" + config.serverIP)
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Статус-API повернуло помилку");
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            config.online = Boolean(data.online);
+
+            if (data.online) {
+                config.players = data.players ? data.players.online : 0;
+                config.maxPlayers = data.players ? data.players.max : config.maxPlayers;
+                if (data.version) {
+                    config.version = data.version;
+                }
+            }
+
+            updateServerUI();
+        })
+        .catch(function (err) {
+            // Якщо API недоступне — просто залишаємо останні відомі дані
+            console.warn("Не вдалося отримати живий статус сервера:", err);
+        });
+}
+
 /* Допоміжна функція: вставити текст в елемент за id, якщо він існує */
 function setText(id, value) {
     const el = document.getElementById(id);
@@ -114,6 +161,23 @@ function setText(id, value) {
 function fillPaymentInfo() {
     setText("cardNumber", config.cardNumber);
     setText("receiverName", config.receiver);
+    setupQrCode();
+}
+
+/* Генерує QR-код з номером картки через безкоштовний публічний сервіс
+   (api.qrserver.com) — жодних бібліотек, просто картинка за посиланням.
+   Якщо колись з'явиться, наприклад, посилання на "банку" Monobank —
+   просто зміни рядок qrData нижче на це посилання. */
+function setupQrCode() {
+    const qrBox = document.getElementById("qrPlaceholder");
+    if (!qrBox) return;
+
+    const qrData = config.cardNumber; // що саме закодовано в QR
+    const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&data=" + encodeURIComponent(qrData);
+
+    qrBox.innerHTML =
+        '<img src="' + qrUrl + '" alt="QR-код для оплати на картку ' + config.cardNumber + '" ' +
+        'style="width:100%;height:100%;background:#fff;border-radius:12px;padding:10px;box-sizing:border-box;display:block;">';
 }
 
 /* =========================================================
@@ -209,17 +273,15 @@ function copyTextToClipboard(text) {
 }
 
 /* =========================================================
-   9. КНОПКА "ПРИЄДНАТИСЯ" — плавно веде до картки сервера
+   9. КНОПКА "ПРИЄДНАТИСЯ" — веде на сторінку із завантаженням
+   модів (join.html), а звідти вже на оплату.
    ========================================================= */
 function setupJoinButton() {
     const joinBtn = document.getElementById("joinBtn");
     if (!joinBtn) return;
 
     joinBtn.addEventListener("click", function () {
-        const serverSection = document.getElementById("server");
-        if (serverSection) {
-            serverSection.scrollIntoView({ behavior: "smooth" });
-        }
+        window.location.href = "join.html";
     });
 }
 
@@ -380,6 +442,8 @@ function setupGalleryLightbox() {
 
 /* =========================================================
    15. ФОРМА ОПЛАТИ (payment.html)
+   Нік і сума надсилаються в Telegram-бота (config.telegram),
+   щоб адміністрація одразу побачила заявку.
    ========================================================= */
 function setupPaymentForm() {
     const form = document.getElementById("paymentForm");
@@ -391,19 +455,76 @@ function setupPaymentForm() {
         e.preventDefault(); // зупиняємо перезавантаження сторінки
 
         const nickname = document.getElementById("payerNick").value.trim();
+        const amount = document.getElementById("payerAmount").value.trim();
 
         if (nickname === "") {
             showToast("Будь ласка, вкажіть свій нік", "fa-triangle-exclamation");
             return;
         }
 
-        // Показуємо красиве повідомлення про успішну відправку
-        if (successBox) {
-            successBox.classList.add("show");
-            successBox.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (amount === "") {
+            showToast("Будь ласка, вкажіть суму", "fa-triangle-exclamation");
+            return;
         }
 
-        showToast("Дякуємо! Заявку на оплату надіслано", "fa-circle-check");
-        form.reset();
+        // Блокуємо кнопку на час відправки, щоб уникнути подвійних заявок
+        const submitBtn = form.querySelector("button[type='submit']");
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.6";
+        }
+
+        sendPaymentToTelegram(nickname, amount).then(function () {
+            // Показуємо красиве повідомлення про успішну відправку
+            if (successBox) {
+                successBox.classList.add("show");
+                successBox.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+            showToast("Дякуємо! Заявку на оплату надіслано", "fa-circle-check");
+            form.reset();
+        }).catch(function () {
+            showToast("Не вдалося надіслати заявку. Спробуйте ще раз", "fa-triangle-exclamation");
+        }).finally(function () {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+            }
+        });
+    });
+}
+
+/* Надсилає повідомлення з ніком і сумою в Telegram-бота.
+   Повертає Promise, щоб форма могла дочекатись результату.
+
+   ВАЖЛИВО: тут перевіряється, чи токен/chat_id ще НЕ заповнені
+   (залишились слова-заглушки "ВАШ_ТОКЕН" / "ВАШ_CHAT_ID").
+   Не заміняй ці рядки-заглушки на значення власного токена в
+   умові нижче — інакше перевірка завжди спрацьовуватиме і
+   повідомлення НІКОЛИ не надсилатимуться (саме це і сталося). */
+function sendPaymentToTelegram(nickname, amount) {
+    const token = config.telegram.botToken;
+    const chatId = config.telegram.chatId;
+
+    // Якщо бот ще не налаштований (залишились підказки-заглушки) —
+    // просто пропускаємо відправку, щоб форма все одно працювала.
+    if (!token || token.indexOf("ВАШ_ТОКЕН") !== -1 || !chatId || String(chatId).indexOf("ВАШ_CHAT_ID") !== -1) {
+        console.warn("Telegram-бот не налаштований. Заповни config.telegram у script.js");
+        return Promise.resolve();
+    }
+
+    const text =
+        "💰 Нова заявка на поповнення балансу!\n\n" +
+        "Нік: " + nickname + "\n" +
+        "Сума: " + amount + " грн";
+
+    return fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text: text })
+    }).then(function (response) {
+        if (!response.ok) {
+            throw new Error("Telegram API повернув помилку");
+        }
+        return response.json();
     });
 }
