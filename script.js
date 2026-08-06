@@ -14,10 +14,10 @@ const config = {
 
     // Дані сервера (в майбутньому сюди можна підключити реальне API)
     serverIP: "185.206.150.54:25611",
-    version: "fabric 1.21.1",
+    version: "1.21.8",
     online: true,      // true = сервер онлайн, false = офлайн
-    players: 0,        // поточна кількість гравців
-    maxPlayers: 0,      // максимальний онлайн
+    players: 15,        // поточна кількість гравців
+    maxPlayers: 50,      // максимальний онлайн
 
     // Дані для сторінки оплати
     cardNumber: "5355 2800 2653 5094",
@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setupFaqAccordion();
     setupGalleryLightbox();
     setupPaymentForm();
+    setupQuickAmounts();
     setActiveNavLink();
 });
 
@@ -131,12 +132,17 @@ function fetchLiveServerStatus() {
         .then(function (data) {
             config.online = Boolean(data.online);
 
-            if (data.online) {
+            if (config.online) {
+                // Сервер онлайн — беремо свіжі дані з API
                 config.players = data.players ? data.players.online : 0;
                 config.maxPlayers = data.players ? data.players.max : config.maxPlayers;
                 if (data.version) {
                     config.version = data.version;
                 }
+            } else {
+                // Сервер офлайн — гравців онлайн бути не може,
+                // тому скидаємо лічильник, щоб не показувати застарілі дані
+                config.players = 0;
             }
 
             updateServerUI();
@@ -512,19 +518,70 @@ function sendPaymentToTelegram(nickname, amount) {
         return Promise.resolve();
     }
 
+    // Дата й час відправки заявки (у зручному для читання форматі)
+    const now = new Date();
+    const dateStr = now.toLocaleDateString("uk-UA", { day: "2-digit", month: "2-digit", year: "numeric" });
+    const timeStr = now.toLocaleTimeString("uk-UA", { hour: "2-digit", minute: "2-digit" });
+
+    // Гарно структуроване повідомлення з емодзі та жирним текстом
+    // (Telegram підтримує просту HTML-розмітку через parse_mode: "HTML")
     const text =
-        "💰 Нова заявка на поповнення балансу!\n\n" +
-        "Нік: " + nickname + "\n" +
-        "Сума: " + amount + " грн";
+        "🟢 <b>Нова заявка на поповнення балансу</b>\n" +
+        "━━━━━━━━━━━━━━━\n" +
+        "🎮 <b>Нік:</b> " + escapeHtml(nickname) + "\n" +
+        "💰 <b>Сума:</b> " + escapeHtml(amount) + " грн\n" +
+        "🕒 <b>Коли:</b> " + dateStr + " о " + timeStr + "\n" +
+        "━━━━━━━━━━━━━━━\n" +
+        "📌 <i>Uhryniv Craft — сервер друзів</i>";
 
     return fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: chatId, text: text })
+        body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "HTML" })
     }).then(function (response) {
         if (!response.ok) {
             throw new Error("Telegram API повернув помилку");
         }
         return response.json();
+    });
+}
+
+/* Екранує спецсимволи HTML, щоб нік/сума не могли зламати
+   розмітку повідомлення в Telegram (parse_mode: "HTML"). */
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
+/* =========================================================
+   16. ШВИДКИЙ ВИБІР СУМИ (payment.html)
+   Клік по кнопці підставляє суму в поле і одразу копіює
+   номер картки — гравцю лишається тільки відкрити банк і вставити.
+   ========================================================= */
+function setupQuickAmounts() {
+    const buttons = document.querySelectorAll(".quick-amount-btn");
+    if (buttons.length === 0) return;
+
+    const amountInput = document.getElementById("payerAmount");
+    if (!amountInput) return;
+
+    buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            // Підставляємо суму в поле
+            amountInput.value = button.getAttribute("data-amount");
+
+            // Підсвічуємо обрану кнопку, знімаємо підсвітку з інших
+            buttons.forEach(function (b) {
+                b.classList.remove("active");
+            });
+            button.classList.add("active");
+
+            // Заодно копіюємо номер картки — лишається тільки
+            // відкрити банк і вставити готову суму й картку
+            copyTextToClipboard(config.cardNumber);
+            showToast("Сума обрана, картку скопійовано — відкрий банк і встав", "fa-copy");
+        });
     });
 }
