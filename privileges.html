@@ -59,22 +59,29 @@
     <section class="section" style="padding-top: 0;">
         <div class="container">
             <!--
+                ЯК ПОСТАВИТИ СВОЄ ФОТО ЗАМІСТЬ ЗАГЛУШКИ:
+                Заміни файл у папці assets/privileges/ на своє фото
+                з ТОЧНО ТАКОЮ Ж НАЗВОЮ (ostapyuk.jpg, bedrus.jpg, isus.jpg).
+                Розмір фото краще брати квадратний (наприклад 600x600),
+                щоб воно рівно вписалось у картку.
+
                 ЯК ДОДАТИ НОВУ ПРИВІЛЕГІЮ:
                 1. Скопіюй цілий блок <div class="glass-card privilege-card ...">...</div>
                 2. Встав його після інших, в потрібному порядку.
-                3. Зміни назву, ціну та список того, що входить (кожен <li> — один пункт).
+                3. Зміни назву, ціну, фото (src="assets/privileges/ТВОЯ_НАЗВА.jpg")
+                   та список того, що входить (кожен <li> — один пункт).
 
                 ЯК ЗРОБИТИ ПРИВІЛЕГІЮ "ТОПОВОЮ":
-                Додай клас "featured" до картки і рядок з .privilege-badge
+                Додай клас "featured" картці і рядок з .privilege-badge
                 (приклад — дивись у картці "Ісус Христос" нижче).
             -->
             <div class="privileges-grid">
 
                 <!-- Остапюк — 10 грн -->
                 <div class="glass-card privilege-card reveal">
-                    <div class="privilege-icon">🥉</div>
+                    <img src="assets/privileges/ostapyuk.jpg" alt="Остапюк" class="privilege-image">
                     <h3 class="privilege-name">Остапюк</h3>
-                    <p class="privilege-price">10 <span>грн</span></p>
+                    <p class="privilege-price">Договорна<span>грн</span></p>
                     <ul class="privilege-perks">
                         <li><i class="fa-solid fa-check"></i> Кольоровий нік у чаті</li>
                         <li><i class="fa-solid fa-check"></i> +1 додатковий хоум</li>
@@ -86,9 +93,9 @@
 
                 <!-- Бедрус — 20 грн -->
                 <div class="glass-card privilege-card reveal">
-                    <div class="privilege-icon">🥈</div>
+                    <img src="assets/privileges/bedrus.jpg" alt="Бедрус" class="privilege-image">
                     <h3 class="privilege-name">Бедрус</h3>
-                    <p class="privilege-price">20 <span>грн</span></p>
+                    <p class="privilege-price">Договорна <span>грн</span></p>
                     <ul class="privilege-perks">
                         <li><i class="fa-solid fa-check"></i> Все з привілеї "Остапюк"</li>
                         <li><i class="fa-solid fa-check"></i> +3 додаткові хоуми</li>
@@ -100,10 +107,10 @@
 
                 <!-- Ісус Христос — 50 грн (топова привілегія) -->
                 <div class="glass-card privilege-card featured reveal">
-                    <span class="privilege-badge">Найкраща</span>
-                    <div class="privilege-icon">👑</div>
+                    <span class="privilege-badge">Спорна</span>
+                    <img src="assets/privileges/isus.jpg" alt="Ісус Христос" class="privilege-image">
                     <h3 class="privilege-name">Ісус Христос</h3>
-                    <p class="privilege-price">50 <span>грн</span></p>
+                    <p class="privilege-price">Договорна <span>грн</span></p>
                     <ul class="privilege-perks">
                         <li><i class="fa-solid fa-check"></i> Все з привілеї "Бедрус"</li>
                         <li><i class="fa-solid fa-check"></i> Необмежена кількість хоумів</li>
